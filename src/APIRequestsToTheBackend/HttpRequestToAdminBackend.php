@@ -24,7 +24,6 @@ namespace Lasallesoftware\Libraryfrontend\APIRequestsToTheBackend;
 
 // LaSalle Software
 use Lasallesoftware\Blogfrontend\JWT\Factory;
-use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator;
 
 // Laravel Framework
 use Illuminate\Support\MessageBag;
@@ -47,11 +46,6 @@ trait HttpRequestToAdminBackend
     protected $factory;
 
     /**
-     * @var Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator
-     */
-    protected $uuidGenerator;
-
-    /**
      * The message bag instance.
      *
      * @var \Illuminate\Support\MessageBag
@@ -64,21 +58,14 @@ trait HttpRequestToAdminBackend
      *
      * @param  Lasallesoftware\Blogfrontend\JWT\Factory  $factory
      */
-    public function __construct(Factory $factory, UuidGenerator $uuidGenerator)
+    public function __construct(Factory $factory)
     {
-        $this->factory       = $factory;
-        $this->uuidGenerator = $uuidGenerator;
-    }
-
-    public function makeUuid($comment, $lasallesoftareEventId = 9)
-    {
-        return $this->uuidGenerator->createUuid($lasallesoftareEventId, $comment, 1);
+        $this->factory = $factory;
     }
 
     /**
      * Send a request to the LaSalle administrative back-end.
      *
-     * @param  string  $uuid            Universal unique identification token
      * @param  string  $endpointPath    The endpoint path. Does *not* include the back-end's URL
      * @param  string  $httpRequest     The HTTP request. Generally, "GET" or "POST"
      * @param  string  $slug            A slug, optional
@@ -87,7 +74,7 @@ trait HttpRequestToAdminBackend
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function sendRequestToLasalleBackend($uuid, $endpointPath, $httpRequest, $slug = null, $postData = null)
+    public function sendRequestToLasalleBackend($endpointPath, $httpRequest, $slug = null, $postData = null)
     {
         $jwt = $this->getJWT($uuid);
 
@@ -166,7 +153,7 @@ trait HttpRequestToAdminBackend
      */
     public function getBackendURL()
     {
-        return env('LASALLE_ADMIN_API_URL');
+        return config('lasallesoftware-libraryfrontend.lasalle_admin_api_url');
     }
 
     /**
@@ -271,7 +258,7 @@ trait HttpRequestToAdminBackend
             return null;
         }
 
-        return env('APP_URL') . '/' . $frontEndRoute . '?page=' . $this->getPageQueryParameterFromUrlString($url) ;
+        return config('app.url') . '/' . $frontEndRoute . '?page=' . $this->getPageQueryParameterFromUrlString($url) ;
     }
 
     /**
@@ -354,10 +341,9 @@ trait HttpRequestToAdminBackend
     /**
      * Get the JWT.
      *
-     * @param  string   $uuid
-     * @return void
+     * @return string
      */
-    public function getJWT($uuid)
+    public function getJWT()
     {
         // Looks like the constructor is not invoked or just fails when this class is called by a queue job.
         // Specifically, Lasallesoftware\Contactformfrontend\Jobs\CreateNewDatabaseRecord.
@@ -365,11 +351,11 @@ trait HttpRequestToAdminBackend
         // To compensate, I have this yucky if statement.
 
         if (isset($this->factory)) {
-            return $this->factory->createJWT($uuid);
+            return $this->factory->createJWT();
         }
 
-        $factory = app('Lasallesoftware\Blogfrontend\JWT\Factory');
-        return $factory->createJWT($uuid);        
+        $factory = app('Lasallesoftware\Libraryfrontend\JWT\Factory');
+        return $factory->createJWT();        
     }
 
     /**
@@ -383,7 +369,7 @@ trait HttpRequestToAdminBackend
     {
         $header = [
             'Authorization'    => 'Bearer ' . $jwt,
-            'RequestingDomain' => env('LASALLE_APP_DOMAIN_NAME'),
+            'RequestingDomain' => config('lasallesoftware-libraryfrontend.lasalle_app_domain_name'),
             'Accept'           => 'application/json',
         ];
 

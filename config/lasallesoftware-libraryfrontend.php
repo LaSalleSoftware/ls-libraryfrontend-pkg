@@ -36,8 +36,6 @@ return [
     | The admin backend is the only one with a database, and with access to certain
     | features and database tables.
     |
-    | Set in the .env file.
-    |
     */
 	'lasalle_app_name' => env('LASALLE_APP_NAME'),
 
@@ -49,10 +47,31 @@ return [
     | Best explained by example: if the app's URL is "https://admin.DoubleTrouble.com",
     | then this is "admin.DoubleTrouble.com".
     |
-    | Set in the .env file.
-    |
     */
     'lasalle_app_domain_name' => env('LASALLE_APP_DOMAIN_NAME'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin app's URL
+    |--------------------------------------------------------------------------
+    |
+    | The admin app's full URL.
+    |
+    */
+    'lasalle_admin_api_url' => env('LASALLE_ADMIN_API_URL'),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Json Web Token AUD claim
+    |--------------------------------------------------------------------------
+    |
+    | URL of the admin app, without the "https://".
+    |
+    | Must be in the installed_domains db table, specified in the title field.
+    |
+    */
+    'lasalle_jwt_aud_claim' => env('LASALLE_JWT_AUD_CLAIM'),
 
     /*
 	|--------------------------------------------------------------------------

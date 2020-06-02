@@ -23,6 +23,9 @@
 
 namespace Lasallesoftware\Libraryfrontend\JWT;
 
+// Laravel
+use Illuminate\Support\Str;
+
 // Third party classes
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
@@ -49,15 +52,15 @@ class Factory
      *
      * @return string
      */
-    public function createJWT($uuid)
+    public function createJWT()
     {
         $signer    = new Sha256();
         $key       = config('lasallesoftware-frontendapp.lasalle_jwt_key');
         $time      = time();
 
-        $issClaim  = app('config')->get('lasallesoftware-libraryfrontend.lasalle_app_domain_name');
-        $audClaim  = env('LASALLE_JWT_AUD_CLAIM');
-        $jtiClaim  = $uuid;
+        $issClaim  = config('lasallesoftware-libraryfrontend.lasalle_app_domain_name');
+        $audClaim  = config('lasallesoftware-libraryfrontend.lasalle_jwt_aud_claim'); 
+        $jtiClaim  = $this->createJtiClaim();
         $iatClaim  = $time;
         $nbfClaim  = $time + 60;  // not used, but left as a placeholder
         $expClaim  = $time + config('lasallesoftware-libraryfrontend.lasalle_jwt_exp_claim_seconds_to_expiration');;
@@ -73,5 +76,17 @@ class Factory
         ;
 
         return $token;
+    }
+
+    /**
+     * Create the JTI claim.
+     * 
+     * https://tools.ietf.org/html/rfc7519#section-4.1.7
+     *
+     * @return string
+     */
+    private function createJtiClaim()
+    {
+        return Str::random(40);
     }
 }
