@@ -55,7 +55,7 @@ class LibraryfrontendServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      //  $this->publishConfig();
+        $this->publishConfig();
     }
 
     /**
