@@ -53,6 +53,22 @@ return [
     |
     */
     'lasalle_app_domain_name' => env('LASALLE_APP_DOMAIN_NAME'),
+
+    /*
+	|--------------------------------------------------------------------------
+	| Json Web Token EXP claim duration
+	|--------------------------------------------------------------------------
+	|
+    | How many seconds until a JWT expires?
+    |
+    | This EXP claim is set in the front-end domain, so you'll want all your domains 
+    | set with the same number.
+	|
+    | https://tools.ietf.org/html/rfc7519#section-4.1.4
+	|
+	*/
+    'lasalle_jwt_exp_claim_seconds_to_expiration' => 3600,    
+
     
     
     /*
