@@ -23,7 +23,7 @@
 namespace Lasallesoftware\Libraryfrontend\APIRequestsToTheBackend;
 
 // LaSalle Software
-use Lasallesoftware\Blogfrontend\JWT\Factory;
+use Lasallesoftware\Libraryfrontend\JWT\Factory;
 
 // Laravel Framework
 use Illuminate\Support\MessageBag;
@@ -76,7 +76,7 @@ trait HttpRequestToAdminBackend
      */
     public function sendRequestToLasalleBackend($endpointPath, $httpRequest, $slug = null, $postData = null)
     {
-        $jwt = $this->getJWT($uuid);
+        $jwt = $this->getJWT();
 
         $headers = $this->getHeader($endpointPath, $jwt);
 

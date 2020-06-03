@@ -15,9 +15,9 @@
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
  *
- * @see       https://lasallesoftware.ca
- * @see       https://packagist.org/packages/lasallesoftware/ls-libraryfrontend-pkg
- * @see       https://github.com/LaSalleSoftware/ls-libraryfrontend-pkg
+ * @see        https://lasallesoftware.ca
+ * @see        https://packagist.org/packages/lasallesoftware/ls-libraryfrontend-pkg
+ * @see        https://github.com/LaSalleSoftware/ls-libraryfrontend-pkg
  */
 
 return [
