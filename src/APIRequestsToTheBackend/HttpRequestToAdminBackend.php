@@ -165,7 +165,7 @@ trait HttpRequestToAdminBackend
     public function getFeaturedImage($featuredImage)
     {
         if ($featuredImage == "none") {
-            return config('lasallesoftware-frontendapp.lasalle_featured_image_default_image');
+            return config('lasallesoftware-libraryfrontend.lasalle_featured_image_default_image');
         }
 
         return $featuredImage;
@@ -180,7 +180,7 @@ trait HttpRequestToAdminBackend
     public function getFeaturedImageType($featuredImageType)
     {
         if ($featuredImageType == "none") {
-            return config('lasallesoftware-frontendapp.lasalle_featured_image_default_type');
+            return config('lasallesoftware-libraryfrontend.lasalle_featured_image_default_type');
         }
 
         return $featuredImageType;
@@ -195,7 +195,7 @@ trait HttpRequestToAdminBackend
     public function getFeaturedImageSocialMediaMetaTag($featuredImageSocialMediaMetaTag)
     {
         if ($featuredImageSocialMediaMetaTag == "none") {
-            return config('lasallesoftware-frontendapp.lasalle_social_media_meta_tag_default_image');
+            return config('lasallesoftware-libraryfrontend.lasalle_social_media_meta_tag_default_image');
         }
 
         return $featuredImageSocialMediaMetaTag;
@@ -208,7 +208,7 @@ trait HttpRequestToAdminBackend
      */
     public function displayErrorView()
     {
-        return view(config('lasallesoftware-frontendapp.lasalle_path_to_front_end_view_path') . '.errors.main', [
+        return view(config('lasallesoftware-libraryfrontend.lasalle_path_to_front_end_view_path') . '.errors.main', [
             'status_code'         => $this->messages->first('StatusCode'),
             'error'               => $this->messages->first('Error'),
             'reason'              => $this->messages->first('Reason'),
@@ -227,7 +227,7 @@ trait HttpRequestToAdminBackend
      */
     public function formatDate($date)
     {
-        return date(config('lasallesoftware-frontendapp.lasalle_date_format'),strtotime($date));
+        return date(config('lasallesoftware-libraryfrontend.lasalle_date_format'),strtotime($date));
     }
 
     /**
@@ -287,7 +287,7 @@ trait HttpRequestToAdminBackend
      */
     public function getSocialMediaMetaTagSite()
     {
-        return config('lasallesoftware-frontendapp.lasalle_social_media_meta_tag_site');
+        return config('lasallesoftware-libraryfrontend.lasalle_social_media_meta_tag_site');
     }
 
     /**
@@ -299,11 +299,11 @@ trait HttpRequestToAdminBackend
      */
     public function getSocialMediaMetaTagCreator()
     {
-        if (config('lasallesoftware-frontendapp.lasalle_social_media_meta_tag_creator') == '') {
-            return config('lasallesoftware-frontendapp.lasalle_social_media_meta_tag_site');
+        if (config('lasallesoftware-libraryfrontend.lasalle_social_media_meta_tag_creator') == '') {
+            return config('lasallesoftware-libraryfrontend.lasalle_social_media_meta_tag_site');
         }
 
-        return config('lasallesoftware-frontendapp.lasalle_social_media_meta_tag_creator');
+        return config('lasallesoftware-libraryfrontend.lasalle_social_media_meta_tag_creator');
     }
 
     /**
@@ -374,7 +374,7 @@ trait HttpRequestToAdminBackend
         ];
 
         if ($endpointPath == $this->getEndpointPath('DisplayHomepageBlogPostsController')) {
-            $header['NumberOfBlogPostsToDisplayOnTheHomePage'] = config('lasallesoftware-frontendapp.lasalle_number_of_recent_blog_posts_to_display_on_the_home_page');
+            $header['NumberOfBlogPostsToDisplayOnTheHomePage'] = config('lasallesoftware-libraryfrontend.lasalle_number_of_recent_blog_posts_to_display_on_the_home_page');
         }
 
         return $header;
@@ -394,7 +394,7 @@ trait HttpRequestToAdminBackend
         if (isset($page)) {
             return [
                 'slug'                          => $slug,
-                'itemsDisplayedOnPaginatedPage' => config('lasallesoftware-frontendapp.lasalle_pagination_number_of_items_displayed_per_page'),
+                'itemsDisplayedOnPaginatedPage' => config('lasallesoftware-libraryfrontend.lasalle_pagination_number_of_items_displayed_per_page'),
                 'page'                          => $page,
             ];
         }

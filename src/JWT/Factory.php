@@ -55,7 +55,7 @@ class Factory
     public function createJWT()
     {
         $signer    = new Sha256();
-        $key       = config('lasallesoftware-frontendapp.lasalle_jwt_key');
+        $key       = config('lasallesoftware-libraryfrontend.lasalle_jwt_key');
         $time      = time();
 
         $issClaim  = config('lasallesoftware-libraryfrontend.lasalle_app_domain_name');
