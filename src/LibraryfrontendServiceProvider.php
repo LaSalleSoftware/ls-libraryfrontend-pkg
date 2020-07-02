@@ -22,6 +22,9 @@
 
 namespace Lasallesoftware\Libraryfrontend;
 
+// LaSalle Software classes
+use Lasallesoftware\Libraryfrontend\Commands\SetenvvarsCommand;
+
 // Laravel Framework
 use Illuminate\Support\ServiceProvider;
 
@@ -43,6 +46,19 @@ class LibraryfrontendServiceProvider extends ServiceProvider
         $this->app->singleton('lslibraryfrontend', function ($app) {
             return new LSLibraryfrontend();
         });
+
+        $this->registerArtisanCommands();
+    }
+
+    /**
+     * Register the artisan commands for this package.
+     */
+    protected function registerArtisanCommands()
+    {
+        $this->app->bind('command.lslibraryfrontend:setenvvars', SetenvvarsCommand::class);
+        $this->commands([
+            'command.lslibraryfrontend:setenvvars',
+        ]);
     }
 
     /**
