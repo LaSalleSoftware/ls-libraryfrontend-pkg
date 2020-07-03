@@ -63,6 +63,19 @@ class SetenvvarsCommand extends Command
      */
     public function handle()
     {
+        if (env('LASALLE_APP_NAME') != 'basicfrontendapp') {
+            echo "\n\n";
+            $this->line("This artisan command is specifically for my LaSalle Software's front-end application.");
+            $this->line('You are installing my '.mb_strtoupper(env('LASALLE_APP_NAME')).' LaSalle Software application.');
+            $this->line('So I am exiting you out of this artisan command.');
+            $this->line('exiting...');
+            $this->line('You are now exited from lslibraryfrontend:setenvvars.');
+            echo "\n\n";
+
+            return;
+        }
+
+
         // -------------------------------------------------------------------------------------------------------------
         // START: INTRO
         // -------------------------------------------------------------------------------------------------------------
