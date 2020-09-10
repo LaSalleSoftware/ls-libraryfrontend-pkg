@@ -401,4 +401,30 @@ trait HttpRequestToAdminBackend
 
         return ['slug' => $slug];
     }
+
+    /**
+     * Do you display in the front-end?
+     * 
+     * Called from Lasallesoftware\Blogfrontend\Http\Controllers\DisplaySinglePostController. And perhaps elsewhere!
+     *
+     * @param  int   $enabled                   This is the "enabled" field. Either 0 (false) or 1 (true).
+     * @param  int   $preview_in_frontend       This is the "preview_in_frontend" field. Either 0 (false) or 1 (true).
+     * @return boolean
+     */
+    public function isDisplay($enabled, $preview_in_frontend)
+    {
+        if ((!isset($enabled)) || (!isset($preview_in_frontend))) {
+            return false;
+        }
+
+        // if this enabled, then of course display
+        if ($enabled) return true;
+
+        // ok... not enabled. Well, if it is supposed to be previewed, AND the token is correct, then display.
+        if (($preview_in_frontend) && (config('lasallesoftware-libraryfrontend.preview_in_frontend_token') == request('preview_in_frontend_token'))) {
+            return true;
+        }
+
+        return false;
+    }
 }

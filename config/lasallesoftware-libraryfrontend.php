@@ -211,10 +211,23 @@ return [
 	| formats are supported. Only the first frame of an animated GIF will be used. SVG is not supported."
 	|
 	*/
-	'lasalle_social_media_meta_tag_default_image'  => 'https://lasallesoftware.ca/nature1.jpg',
-
+    'lasalle_social_media_meta_tag_default_image'  => 'https://lasallesoftware.ca/nature1.jpg',
     
-    
-   
+    /*
+	|--------------------------------------------------------------------------
+	| Preview in the front-end token
+	|--------------------------------------------------------------------------
+	|
+	| When available, such as an individual blog post, you can view in the front-end but not display to the whole world.
+	|
+	| You have to set the "preview_in_frontend" field to true (and "enabled" to false), and then
+	| append your URL with "?preview_in_frontend=value-of-this-parameter".
+	| 
+    |  *** PLEASE DO NOT SET TO THE DEFAULT VALUE, BECAUSE THIS IS OPEN SOURCE SOFTWARE SO EVERYONE KNOWS THIS DEFAULT VALUE! ***
+	| 
+	| Please use a text string that is hard to guess
+	| 
+	*/
+	'preview_in_frontend_token' => 'default-preview-in-frontend-token',
 
 ];
