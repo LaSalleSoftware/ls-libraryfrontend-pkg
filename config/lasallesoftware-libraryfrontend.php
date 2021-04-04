@@ -159,6 +159,7 @@ return [
     //'lasalle_featured_image_default_type'  => 'code',
     'lasalle_featured_image_default_image' => '/nature1.jpg',
 
+
     /*
 	|--------------------------------------------------------------------------
 	| Number of Recent Blog Posts to Display on the Home Page
@@ -170,6 +171,62 @@ return [
 	|
 	*/
     'lasalle_number_of_recent_blog_posts_to_display_on_the_home_page'  => 5,
+
+
+    /*
+	|--------------------------------------------------------------------------
+	| Podcast Shows to Display on the Home Page
+	|--------------------------------------------------------------------------
+	|
+	| What podcast shows do you want to display on the home page?
+	|
+	| Must be an array of the "podcast_shows" table's "ID" field. 
+	|
+	| Will be ignored if you are not using LaSalle Software's podcast packages.
+	|
+	*/
+    'lasalle_podcast_shows_to_display_on_the_home_page' => [1,2],
+
+    /*
+	|--------------------------------------------------------------------------
+	| Number of Recent Podcast Episodes to Display on the Home Page
+	|--------------------------------------------------------------------------
+	|
+	| How many recent podcast episodes do you want to display on the home page? 
+	|
+	| Will be ignored if you are not using LaSalle Software's podcast packages.
+	|
+	*/
+    'lasalle_number_of_recent_podcast_episodes_to_display_on_the_home_page' => 1,
+
+
+    /*
+	|--------------------------------------------------------------------------
+	| Video Shows to Display on the Home Page
+	|--------------------------------------------------------------------------
+	|
+	| What video shows do you want to display on the home page?
+	|
+	| Must be an array of the "podcast_shows" table's "ID" field. 
+	|
+	| Will be ignored if you are not using LaSalle Software's podcast packages.
+	|
+	*/
+    'lasalle_video_shows_to_display_on_the_home_page' => [1,2],
+
+
+    /*
+	|--------------------------------------------------------------------------
+	| Number of Recent Video Episodes to Display on the Home Page
+	|--------------------------------------------------------------------------
+	|
+	| How many recent video episodes do you want to display on the home page? 
+	|
+	| Will be ignored if you are not using LaSalle Software's video packages.
+	|
+	*/
+    'lasalle_number_of_recent_video_episodes_to_display_on_the_home_page' => 1,
+
 
     /*
 	|--------------------------------------------------------------------------
