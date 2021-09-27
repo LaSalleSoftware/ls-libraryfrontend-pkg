@@ -1,6 +1,9 @@
 # CHANGE LOG
 
-## VERSION 2.2.3 (coming!)
+## VERSION 2.2.4 (coming!)
+
+## VERSION 2.2.3 (September 27, 2021)
+* [v2.2.3 issues](https://github.com/LaSalleSoftware/ls-libraryfrontend-pkg/milestone/8?closed=1)
 
 ## VERSION 2.2.2 (June 17, 2021)
 * [v2.2.2 issues](https://github.com/LaSalleSoftware/ls-libraryfrontend-pkg/milestone/7?closed=1)
