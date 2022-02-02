@@ -87,7 +87,7 @@ trait HttpRequestToAdminBackend
         $client = new Client();
 
         try {
-
+            
             if ($httpRequest == 'GET') {
 
                 $response = $client->request('GET', $apiUrl . $endpointPath, [
@@ -116,6 +116,7 @@ trait HttpRequestToAdminBackend
             return $this->createTheErrorMessageBag($e->getResponse());
         }
     }
+
 
     /**
      * Our request returned an error? Well, let's create the MessageBag instance for the view.

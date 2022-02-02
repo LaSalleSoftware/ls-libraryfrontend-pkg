@@ -27,9 +27,12 @@ namespace Lasallesoftware\Libraryfrontend\JWT;
 use Illuminate\Support\Str;
 
 // Third party classes
-use Lcobucci\JWT\Builder;
+use DateTimeImmutable; 
+use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
-use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Signer\Key\InMemory;
+
+// https://lcobucci-jwt.readthedocs.io/en/latest/upgrading/ (from v3 to v4)
 
 
 class Factory
@@ -55,27 +58,30 @@ class Factory
     public function createJWT()
     {
         $signer    = new Sha256();
-        $key       = config('lasallesoftware-libraryfrontend.lasalle_jwt_key');
-        $time      = time();
+        $key       = InMemory::plainText(config('lasallesoftware-libraryfrontend.lasalle_jwt_key'));
+        $now       = new DateTimeImmutable();
 
         $issClaim  = config('lasallesoftware-libraryfrontend.lasalle_app_domain_name');
         $audClaim  = config('lasallesoftware-libraryfrontend.lasalle_jwt_aud_claim'); 
         $jtiClaim  = $this->createJtiClaim();
-        $iatClaim  = $time;
-        $nbfClaim  = $time + 60;  // not used, but left as a placeholder
-        $expClaim  = $time + config('lasallesoftware-libraryfrontend.lasalle_jwt_exp_claim_seconds_to_expiration');;
+        $iatClaim  = $now;
+        $nbfClaim  = $now->modify('+1 minute');  // not used, but left as a placeholder
+        $expClaim  = $now->modify('+'.config('lasallesoftware-libraryfrontend.lasalle_jwt_exp_claim_seconds_to_expiration').' seconds');
 
-        $token = (new Builder())
+        // https://lcobucci-jwt.readthedocs.io/en/latest/issuing-tokens/
+        $config = Configuration::forSymmetricSigner(new Sha256(), $key);
+
+        $token = $config->builder()
             ->issuedBy($issClaim)                // Configures the issuer (iss claim)
             ->permittedFor($audClaim)            // Configures the audience (aud claim)
             ->identifiedBy($jtiClaim, true)      // Configures the id (jti claim), replicating as a header item
-            ->issuedAt($iatClaim)                // Configures the time that the token was issue (iat claim)
+            ->issuedAt($iatClaim)                // Configures the time that the token was issued (iat claim) 
             ->canOnlyBeUsedAfter($nbfClaim)      // Configures the time that the token can be used (nbf claim)
             ->expiresAt($expClaim)               // Configures the expiration time of the token (exp claim)
-            ->getToken($signer, new Key($key))   // Retrieves the generated token
+            ->getToken($config->signer(), $config->signingKey())   // Retrieves the generated token
         ;
 
-        return $token;
+        return $token->toString();
     }
 
     /**
