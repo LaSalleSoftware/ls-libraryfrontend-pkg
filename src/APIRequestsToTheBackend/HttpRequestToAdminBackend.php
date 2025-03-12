@@ -217,6 +217,7 @@ trait HttpRequestToAdminBackend
             'featured_image_type' => $this->getFeaturedImageType('none'),
             'featured_image_social_media_meta_tag' => $this->getFeaturedImageSocialMediaMetaTag('none'),
             'copyright'           => env('LASALLE_COPYRIGHT_IN_FOOTER'),
+            'sponsors'            => $body->sponsors,
         ]);
     }
 
